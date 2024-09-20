@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-import { createMapOffers, membresiaItems, tipoOfertas } from "@/types/dataFake.ts";
-import { TipoMembresia, TipoPromocion, TipoPromocionRequest } from "@/types/types.ts";
-import { ref } from "vue";
 import Offer from "@/components/Offer.vue";
+import { createMapOffers, membresiaItems } from "@/types/dataFake.ts";
+import { TipoMembresia, TipoPromocion } from "@/types/types.ts";
+import { ref } from "vue";
 
 
 const selectedTipoMembresia = ref<TipoMembresia | null>()
@@ -12,10 +12,6 @@ const offers = ref<Map<string, TipoPromocion[]>>(createMapOffers())
 
 const offerArray = ref<TipoPromocion[]>();
 
-const montoOfertaRequest = ref<number>()
-const tiempoOfertaRequest = ref<string>()
-const tipoOfertaRequest = ref<string>()
-const conceptoOfertaRequest = ref<string>()
 
 function updateArray(tipoMembresia: TipoMembresia) {
   selectedTipoMembresia.value = tipoMembresia
@@ -30,19 +26,7 @@ function checkItemSelected(id: string) {
   return selectedTipoMembresia.value.id == id;
 }
 
-function crearOfferRequest(): TipoPromocionRequest {
-  return <TipoPromocionRequest>{
-    concepto: conceptoOfertaRequest.value,
-    tiempo: tiempoOfertaRequest.value,
-    monto: montoOfertaRequest.value?.valueOf(),
-    tipo: tipoOfertaRequest.value
-  }
-}
 
-async function crearPromocion() {
-  let requestOffer = crearOfferRequest();
-  console.log(JSON.stringify(requestOffer))
-}
 </script>
 
 <template>
