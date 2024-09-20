@@ -1,39 +1,22 @@
 <template>
   <v-col cols="12">
+    <h2>{{ title }}</h2>
     <v-form @submit.prevent>
-      <v-text-field
-          v-model="conceptoOfertaRequest"
-          :rules="[v => !!v || 'Concepto is required']"
-          label="Concepto"
-          clearable
-      ></v-text-field>
-      <v-select
-          :items="tipoOfertas"
-          label="Tipo Oferta"
-          v-model="tipoOfertaRequest"
-          :rules="[v => !!v || 'Tipo Oferta is required']"
-          required>
+      <v-text-field v-model="conceptoOfertaRequest" :rules="[v => !!v || 'Concepto is required']" label="Concepto"
+        clearable></v-text-field>
+      <v-select :items="tipoOfertas" label="Tipo Oferta" v-model="tipoOfertaRequest"
+        :rules="[v => !!v || 'Tipo Oferta is required']" required>
       </v-select>
-      <v-select
-          :items="membresiaItems"
-          v-model="tiempoOfertaRequest"
-          label="Tiempo"
-          item-value="idConcepto"
-          item-title="descripcion"
-          :rules="[v => !!v || 'Tiempo is required']"
-          required>
+      <v-select :items="membresiaItems" v-model="tiempoOfertaRequest" label="Tiempo" item-value="idConcepto"
+        item-title="descripcion" :rules="[v => !!v || 'Tiempo is required']" required>
       </v-select>
-      <v-text-field label="Monto"
-                    v-model="montoOfertaRequest"
-                    prefix="S/"
-                    :rules="montoRules"
-                    type="number"
-                    min="0"
-                    step="any"
-      ></v-text-field>
-      <v-btn class="mt-2"
-             type="submit"
-             block>Submit
+      <v-text-field label="Monto" v-model="montoOfertaRequest" prefix="S/" :rules="montoRules" type="number" min="0"
+        step="any"></v-text-field>
+      <v-btn class="text-none mb-4" :disabled="!hasChanges" color="indigo-darken-3" size="x-large" variant="flat"
+        type="submit" block>Guardar
+      </v-btn>
+      <v-btn class="text-none" @click="cancelOperation" color="grey-lighten-3" size="x-large" variant="flat" block>
+        Cancelar
       </v-btn>
     </v-form>
   </v-col>
@@ -41,34 +24,42 @@
 
 <script setup lang="ts">
 
-import {findOfferByIdConcepto, membresiaItems, tipoOfertas} from "@/types/dataFake.ts";
+import {
+  findOfferByIdConcepto,
+  membresiaItems,
+  tipoOfertas
+} from "@/types/dataFake.ts";
 
-import {TipoPromocionRequest} from "@/types/types.ts";
-import {ref} from "vue";
-import {useRoute} from "vue-router";
-
-const enablePromocionOffer = ref<boolean>(false)
-
+import { TipoPromocionRequest } from "@/types/types.ts";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
 const idConcepto = route.params.id;
 let title = 'Add Offer';
 
-let offer: TipoPromocionRequest = null
 const montoOfertaRequest = ref<number>()
 const tiempoOfertaRequest = ref<string>()
 const tipoOfertaRequest = ref<string>()
 const conceptoOfertaRequest = ref<string>()
+const isEditMode = ref<boolean>(false)
+
+// Variables para guardar el estado original
+let originalOffer = ref<TipoPromocionRequest | null>(null);
 
 if (idConcepto) {
   // edit mode
   title = 'Edit Offer';
-  offer = findOfferByIdConcepto(idConcepto)
+  let offer: TipoPromocionRequest = findOfferByIdConcepto(idConcepto)
+  isEditMode.value = true
   if (offer) {
     montoOfertaRequest.value = offer.monto
     tiempoOfertaRequest.value = offer.tiempo
     tipoOfertaRequest.value = offer.tipo
     conceptoOfertaRequest.value = offer.concepto
+
+    // Guardamos el estado original de la oferta para comparación
+    originalOffer.value = { ...offer };
   }
 }
 
@@ -82,8 +73,28 @@ const montoRules = [
   }
 ]
 
+// Método para cancelar la operación
+const cancelOperation = () => {
+  console.log("Cancelando la operación");
+  // Limpiar los campos del formulario
+  conceptoOfertaRequest.value = undefined;
+  tiempoOfertaRequest.value = undefined;
+  montoOfertaRequest.value = undefined;
+  tipoOfertaRequest.value = undefined;
+};
+
+const hasChanges = computed(() => {
+  if (!isEditMode.value) return true;
+  if (!originalOffer.value) return false;
+
+  return (
+    conceptoOfertaRequest.value !== originalOffer.value.concepto ||
+    tiempoOfertaRequest.value !== originalOffer.value.tiempo ||
+    tipoOfertaRequest.value !== originalOffer.value.tipo ||
+    montoOfertaRequest.value !== originalOffer.value.monto
+  );
+});
+
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
