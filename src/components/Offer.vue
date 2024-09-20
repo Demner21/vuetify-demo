@@ -19,7 +19,6 @@ function handleColor(offer: TipoPromocion) {
       v-if="offer"
       :color="handleColor(offer)"
       variant="elevated"
-      class="w-50 h-50"
   >
     <v-card-item>
       <v-card-title>{{ offer.concepto }}</v-card-title>
@@ -28,20 +27,27 @@ function handleColor(offer: TipoPromocion) {
       <v-card-text>{{ offer.tipo }}</v-card-text>
     </v-card-item>
     <v-card-actions>
-<!--      <RouterView v-slot="{ Component, route }">
-        <component
-            :is="Component"
-            view-prop="offer"
-            :key="route.path"
-        />
-      </RouterView>-->
-      <v-btn primary>
-        <router-link :to="`/offers/edit/${offer.idConcepto}`">Edit</router-link>
+      <v-btn 
+        class="primary"
+        color="grey-darken-4"
+        size="small"
+        prepend-icon="mdi-wrench"
+        :to="`/offers/edit/${offer.idConcepto}`"
+        >Editar
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <style scoped>
-
+.v-btn {
+  width: 100px;
+  min-width: 50px;
+}
+.v-btn::before {
+  background-color: transparent;
+}
+.v-btn i:hover{
+  transform: scale(1.15);
+}
 </style>
