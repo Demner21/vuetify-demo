@@ -1,8 +1,10 @@
-import {createMemoryHistory, createRouter, RouteRecordRaw} from "vue-router";
+import { createMemoryHistory, createRouter, RouteRecordRaw } from "vue-router";
 import HomeView from "@/view/HomeView.vue";
 import OffersView from "@/view/OffersView.vue";
 import FakeView from "@/view/FakeView.vue";
 import AddEdit from "@/view/offers/AddEdit.vue";
+import WinnersList from "@/view/winners/List.vue"
+
 
 const routes: RouteRecordRaw[] = [
     {
@@ -29,6 +31,11 @@ const routes: RouteRecordRaw[] = [
         path: '/offers/edit/:id',
         name: "offersEdit",
         component: AddEdit
+    },
+    {
+        path: '/winners',
+        name: "winnersList",
+        component: WinnersList
     }
 
 ]
