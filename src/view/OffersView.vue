@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import Offer from "@/components/Offer.vue";
-import { createMapOffers, membresiaItems } from "@/types/dataFake.ts";
+import { createMapOffers, tiempoDeMembresias } from "@/types/dataFake.ts";
 import { TipoMembresia, TipoPromocion } from "@/types/types.ts";
 import { ref } from "vue";
 
@@ -34,8 +34,14 @@ function checkItemSelected(id: string) {
     <v-list-item title="Promociones" subtitle="Offers"></v-list-item>
     <v-divider></v-divider>
     <v-list nav>
-      <v-list-item link lines="two" v-for="item in membresiaItems" :key="item.id" :title="item.descripcion"
-        :subtitle="item.idConcepto" @click="updateArray(item)" :class="{ active: checkItemSelected(item.id) }" />
+      <v-list-item link 
+        lines="two" 
+        v-for="tiempo in tiempoDeMembresias" 
+        :key="tiempo.id" 
+        :title="tiempo.descripcion"
+        :subtitle="tiempo.idConcepto" 
+        @click="updateArray(tiempo)"
+        :class="{ active: checkItemSelected(tiempo.id) }" />
     </v-list>
   </v-navigation-drawer>
 

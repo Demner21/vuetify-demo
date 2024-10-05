@@ -7,12 +7,15 @@ defineProps<{
 }>()
 
 function handleColor(offer: TipoPromocion) {
+  if(!(offer.habilitado)){
+    return "brown-darken-4 text-center"
+  }
   if (offer.tipo==='PROMOCIONAL'){
     return "lime-darken-4 text-center"
   }
   return "blue-grey-darken-1 text-center"
 }
-</script>|
+</script>
 
 <template>
   <v-card
@@ -29,7 +32,7 @@ function handleColor(offer: TipoPromocion) {
     <v-card-actions>
       <v-btn 
         class="primary"
-        color="grey-darken-4"
+        color="white"
         size="small"
         prepend-icon="mdi-wrench"
         :to="`/offers/edit/${offer.idConcepto}`"

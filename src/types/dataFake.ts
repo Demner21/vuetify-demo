@@ -157,7 +157,7 @@ export const winners = ref<CreateWinner[]>([
     }
 ])
 
-export const membresiaItems = ref<TipoMembresia[]>([
+export const tiempoDeMembresias = ref<TipoMembresia[]>([
     { id: 'ONE_MONTH', descripcion: '1 MES', idConcepto: '1MBASIC' },
     { id: 'TWO_MONTHS', descripcion: '2 MESES', idConcepto: '2MBASIC' },
     { id: 'THREE_MONTHS', descripcion: '3 MESES', idConcepto: '3MBASIC' },
@@ -174,7 +174,8 @@ export function findOfferByIdConcepto(idConcepto: string | RouteParamValue[]): T
         "concepto": "PROMOCION APERTURA 1 MES",
         "tiempo": "ONE_MONTH",
         "monto": 49.90,
-        "tipo": "PROMOCIONAL"
+        "tipo": "PROMOCIONAL",
+        "habilitado": true
     }
 }
 
@@ -186,14 +187,24 @@ export function createMapOffers(): Map<string, TipoPromocion[]> {
                 "concepto": "PROMOCION APERTURA 1 MES",
                 "tiempo": "ONE_MONTH",
                 "monto": 49.90,
-                "tipo": "PROMOCIONAL"
+                "tipo": "PROMOCIONAL",
+                "habilitado": false
             },
             {
                 "idConcepto": "1MBASIC",
                 "concepto": "1 MES",
                 "tiempo": "ONE_MONTH",
                 "monto": 30.90,
-                "tipo": "REGULAR"
+                "tipo": "REGULAR",
+                "habilitado": true
+            },
+            {
+                "idConcepto": "1MAPER24_1",
+                "concepto": "PROMOCION CM ",
+                "tiempo": "ONE_MONTH",
+                "monto": 20.90,
+                "tipo": "PROMOCIONAL",
+                "habilitado": true
             }
         ]],
         ["ONE_YEAR", [
@@ -202,7 +213,8 @@ export function createMapOffers(): Map<string, TipoPromocion[]> {
                 "concepto": "12 MESES",
                 "tiempo": "ONE_YEAR",
                 "monto": 360.90,
-                "tipo": "REGULAR"
+                "tipo": "REGULAR",
+                "habilitado": true
             }
         ]],
         ["ROUTINE", [
@@ -210,7 +222,8 @@ export function createMapOffers(): Map<string, TipoPromocion[]> {
                 "idConcepto": "ROUBASIC",
                 "concepto": "1 DIA",
                 "tiempo": "ROUTINE",
-                "monto": 15.90, "tipo": "REGULAR"
+                "monto": 15.90, "tipo": "REGULAR",
+                "habilitado": true
             }
         ]],
         ["THREE_MONTHS", [
@@ -219,14 +232,16 @@ export function createMapOffers(): Map<string, TipoPromocion[]> {
                 "concepto": "PROMOCION APERTURA 3 MESES",
                 "tiempo": "THREE_MONTHS",
                 "monto": 259.90,
-                "tipo": "PROMOCIONAL"
+                "tipo": "PROMOCIONAL",
+                "habilitado": true
             },
             {
                 "idConcepto": "3MBASIC",
                 "concepto": "3 MESES",
                 "tiempo": "THREE_MONTHS",
                 "monto": 90.90,
-                "tipo": "REGULAR"
+                "tipo": "REGULAR",
+                "habilitado": true
             }
         ]],
         ["TWO_MONTHS", [
@@ -235,7 +250,8 @@ export function createMapOffers(): Map<string, TipoPromocion[]> {
                 "concepto": "2 MESES",
                 "tiempo": "TWO_MONTHS",
                 "monto": 60.90,
-                "tipo": "REGULAR"
+                "tipo": "REGULAR",
+                "habilitado": true
             }
         ]],
         ["SIX_MONTHS", [
@@ -244,7 +260,8 @@ export function createMapOffers(): Map<string, TipoPromocion[]> {
                 "concepto": "6 MESES",
                 "tiempo": "SIX_MONTHS",
                 "monto": 180.90,
-                "tipo": "REGULAR"
+                "tipo": "REGULAR",
+                "habilitado": true
             }
         ]],
     ]);

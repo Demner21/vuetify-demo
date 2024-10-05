@@ -3,7 +3,8 @@ export interface TipoPromocion {
     concepto: string,
     tiempo: string,
     monto: number,
-    tipo: string
+    tipo: string,
+    habilitado:  boolean
 }
 
 export interface TipoMembresia {
@@ -16,7 +17,8 @@ export interface TipoPromocionRequest {
     concepto: string,
     tiempo: string,
     monto: number,
-    tipo: string
+    tipo: string,
+    habilitado:  boolean
 }
 
 export interface CreateWinner {
