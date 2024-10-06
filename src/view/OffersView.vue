@@ -30,37 +30,26 @@ function checkItemSelected(id: string) {
 </script>
 
 <template>
-  <v-navigation-drawer permanent>
+  <v-navigation-drawer permanent :location="$vuetify.display.mobile ? 'bottom' : undefined" :width="130">
     <v-list-item title="Promociones" subtitle="Offers"></v-list-item>
     <v-divider></v-divider>
     <v-list nav>
-      <v-list-item link 
-        lines="two" 
-        v-for="tiempo in tiempoDeMembresias" 
-        :key="tiempo.id" 
-        :title="tiempo.descripcion"
-        :subtitle="tiempo.idConcepto" 
-        @click="updateArray(tiempo)"
-        :class="{ active: checkItemSelected(tiempo.id) }" />
+      <v-list-item link lines="two" v-for="tiempo in tiempoDeMembresias" :key="tiempo.id" :title="tiempo.descripcion"
+        :subtitle="tiempo.idConcepto" @click="updateArray(tiempo)" :class="{ active: checkItemSelected(tiempo.id) }" />
     </v-list>
   </v-navigation-drawer>
-
-  <v-col cols="12" md="2">
-    <v-btn to="/offers/add"> AGREGAR</v-btn>
-  </v-col>
-
-
-  <div class="justify-space-between">
-    <v-container>
-      <v-row no-gutters>
-        <v-col cols="auto" sm="6" md="6">
-          <v-sheet v-for="(offer) in offerArray" class="ma-2 pa-2">
-            <Offer v-bind:offer="offer"/>
-          </v-sheet>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-row class="pa-0 ma-0">
+    <v-col cols="12" md="2">
+      <v-btn to="/offers/add"> AGREGAR</v-btn>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col cols="auto">
+      <v-sheet v-for="(offer) in offerArray">
+        <Offer v-bind:offer="offer" />
+      </v-sheet>
+    </v-col>
+  </v-row>
 
 </template>
 |

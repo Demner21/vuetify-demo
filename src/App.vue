@@ -4,7 +4,7 @@
 <template>
   <v-app id="inspire" d-flex flex-column mb-6 full-height>
     <v-app-bar app :elevate-on-scroll="true" color="primary" prominent>
-      <v-toolbar-title>My files</v-toolbar-title>
+      <v-toolbar-title>My demo</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn to="/">Home</v-btn>
