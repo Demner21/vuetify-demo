@@ -70,7 +70,7 @@ if (idConcepto) {
 
 const montoRules = [
   (value: string) => {
-    if (!!value) return true
+    if (value) return true
     // Ensure value is a valid number
     if (/^\d+(\.\d+)?$/.test(value)) return true;
     return 'Value must be a valid number (e.g., 123.45).';

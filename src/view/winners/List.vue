@@ -49,7 +49,7 @@ onMounted(async () => {
 })
 
 function checkWinnerSelected(id: number): boolean {
-    if (winnerSelected == null || winnerSelected.value == null) {
+    if (winnerSelected.value == null || winnerSelected.value == null) {
         return false;
     }
     if (winnerSelected.value.id == id) {

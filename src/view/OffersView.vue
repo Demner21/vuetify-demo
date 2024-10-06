@@ -45,7 +45,7 @@ function checkItemSelected(id: string) {
   </v-row>
   <v-row>
     <v-col cols="auto">
-      <v-sheet v-for="(offer) in offerArray">
+      <v-sheet v-for="(offer) in offerArray" :key="offer.idConcepto">
         <Offer v-bind:offer="offer" />
       </v-sheet>
     </v-col>
