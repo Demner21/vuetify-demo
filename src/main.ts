@@ -1,46 +1,29 @@
-import {createApp} from 'vue'
-//import './style.css'
+import { createApp } from 'vue'
 import App from './App.vue'
-// Vuetify
-import 'vuetify/styles'
-import {createVuetify} from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 //router
 import router from '@/router/router.ts'
 
-//CSS and Vuetify
-import {aliases, mdi} from 'vuetify/iconsets/mdi'
 
-// make sure to also import the coresponding css
-import "@mdi/font/css/materialdesignicons.css";
-import {createPinia} from "pinia"; // Ensure you are using css-loader
+import { createPinia } from "pinia"; // Ensure you are using css-loader
+import { registerPlugins } from './plugins';
 
-//install vuetify
-const vuetify = createVuetify({
-    icons: {
-        defaultSet: 'mdi',
-        aliases,
-        sets: {
-            mdi
-        },
-    },
-    components,
-    directives,
-})
+/** Create Vue app */
+const vueApp = createApp(App);
 
-/** Register Vue */
-const vue = createApp(App);
-vue.use(router);
-vue.use(vuetify);
+/** Register router */
+vueApp.use(router);
 
-//CREATE PINIA
+/** Register plugins */
+registerPlugins(vueApp)
+
+
+/** Register store */
 const pinia = createPinia()
-vue.use(pinia)
+vueApp.use(pinia)
 
 
 // Run!
 router
     .isReady()
-    .then(() => vue.mount('#app'))
+    .then(() => vueApp.mount('#app'))
     .catch(e => console.error(e));
