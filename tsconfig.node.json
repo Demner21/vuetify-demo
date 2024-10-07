@@ -3,10 +3,12 @@
     "target": "ES2022",
     "lib": ["ES2023"],
     "module": "ESNext",
+    "types": ["node"],
     "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",

@@ -1,11 +1,10 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
 //router
-import router from '@/router/router.ts'
+import router from "@/router/router.ts";
 
-
-import { createPinia } from "pinia"; // Ensure you are using css-loader
-import { registerPlugins } from './plugins';
+import { createPinia } from "pinia";
+import { registerPlugins } from "./plugins";
 
 /** Create Vue app */
 const vueApp = createApp(App);
@@ -14,16 +13,14 @@ const vueApp = createApp(App);
 vueApp.use(router);
 
 /** Register plugins */
-registerPlugins(vueApp)
-
+registerPlugins(vueApp);
 
 /** Register store */
-const pinia = createPinia()
-vueApp.use(pinia)
-
+const pinia = createPinia();
+vueApp.use(pinia);
 
 // Run!
 router
-    .isReady()
-    .then(() => vueApp.mount('#app'))
-    .catch(e => console.error(e));
+  .isReady()
+  .then(() => vueApp.mount("#app"))
+  .catch((e) => console.error(e));

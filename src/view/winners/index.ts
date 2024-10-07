@@ -1,1 +1,1 @@
-export { default as WinnersList } from './List.vue'
+export { default as WinnersList } from "./List.vue";

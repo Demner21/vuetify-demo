@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <v-app id="inspire" d-flex flex-column mb-6 full-height>
